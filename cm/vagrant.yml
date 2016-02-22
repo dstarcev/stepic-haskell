@@ -1,0 +1,19 @@
+- hosts: all
+  gather_facts: no
+  
+  tasks:
+  - name: Add Java apt repository
+    apt_repository: repo=ppa:hvr/ghc
+    become: yes
+
+  - apt: name={item}
+    with_items:
+      - cabal-install-1.22
+      - ghc-7.10.3
+    become: yes
+
+  - lineinfile:
+      dest: /home/vagrant/.bashrc
+      create: yes
+      line: export PATH="\$HOME/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/7.10.3/bin:\$PATH"
+    become: yes
