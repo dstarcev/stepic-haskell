@@ -6,7 +6,7 @@
     apt_repository: repo=ppa:hvr/ghc
     become: yes
 
-  - apt: name={item}
+  - apt: name={{item}}
     with_items:
       - cabal-install-1.22
       - ghc-7.10.3
